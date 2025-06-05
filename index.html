@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Permintaan Maaf</title>
+<style>
+  :root {
+    --pink-fade: #ffd6de;
+    --heart-color: #e75480;
+    --heart-glow: #ff99ac;
+    --button-bg: #e75480;
+    --button-hover-bg: #d1436e;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    margin: 0;
+    height: 100vh;
+    background: var(--pink-fade);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-main);
+    color: #5a1a33;
+    overflow: hidden;
+    user-select: none;
+  }
+  .container {
+    background: #ffe9ee;
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 8px 20px rgba(231, 84, 128, 0.25);
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+  .hearts {
+    font-size: 3rem;
+    color: var(--heart-color);
+    user-select: none;
+    animation: pulseHeart 1.5s infinite;
+    margin-bottom: 1.5rem;
+  }
+  @keyframes pulseHeart {
+    0%, 100% { transform: scale(1); color: var(--heart-color);}
+    50% { transform: scale(1.2); color: var(--heart-glow);}
+  }
+  button {
+    background: var(--button-bg);
+    border: none;
+    padding: 0.8rem 2rem;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 6px 12px rgba(231, 84, 128, 0.6);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    letter-spacing: 1px;
+    outline-offset: 3px;
+  }
+  button:hover {
+    background: var(--button-hover-bg);
+    transform: scale(1.05);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+  .message {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #7a3a56;
+    min-height: 4rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .message.show {
+    opacity: 1;
+  }
+  .subtext {
+    margin-top: 0.7rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: #9b5e7a;
+  }
+</style>
+</head>
+<body>
+<div class="container" role="main" aria-label="Permintaan Maaf">
+  <div class="hearts" aria-hidden="true">️🤙🙏👈</div>
+  <h1>Maapiiin duuung...</h1>
+  <button id="apology-btn" aria-describedby="apology-text">Klik aku untuk pesan maaf</button>
+  <div class="message" id="apology-text" aria-live="polite">
+    <!-- Apology text will appear here -->
+  </div>
+</div>
+
+<audio id="click-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+<audio autoplay src="maaf.mp3"></audio>
+
+<script>
+  const btn = document.getElementById('apology-btn');
+  const message = document.getElementById('apology-text');
+  const sound = document.getElementById('click-sound');
+
+  btn.addEventListener('click', () => {
+    sound.currentTime = 0;
+    sound.play();
+
+    message.classList.remove('show');
+    // small delay for fade out, then change text, then fade in
+    setTimeout(() => {
+      message.innerHTML = `
+        <strong>maaapin duuung piyayayayayyaaaa</strong><br />
+        <span class="subtext">tadiiii lagi nguling gegara hari panas jadi capee puaso puloooo</span>
+      `;
+      message.classList.add('show');
+    }, 200);
+  });
+</script>
+</body>
+</html>
+
